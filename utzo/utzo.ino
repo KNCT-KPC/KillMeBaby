@@ -3,7 +3,7 @@ const int SP_BACK = 11;
 const int SW_PORT = 8;
 const int LED_PORT = 7;
 
-const int VOLUME = 128;
+const int VOLUME = 16;
 const int FD = 200;
 const int BD = FD;
 const int ISI = -50;
