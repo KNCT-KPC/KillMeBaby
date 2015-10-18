@@ -1,6 +1,7 @@
 const int SP_FRONT = 3;
 const int SP_BACK = 11;
 const int SW_PORT = 8;
+const int LED_PORT = 7;
 
 const int VOLUME = 128;
 const int FD = 200;
@@ -19,6 +20,7 @@ void setup() {
   pinMode(SP_FRONT, OUTPUT);
   pinMode(SP_BACK, OUTPUT);
   pinMode(SW_PORT, INPUT_PULLUP);
+  pinMode(LED_PORT, OUTPUT);
 
   Serial.begin(9600);
 }
@@ -48,9 +50,13 @@ void checkButton()
 
 void driveDevice(unsigned long nowtime)
 {
+  bool flg = (nowtime < TOTAL_END);
+  
   analogWrite(SP_FRONT, (nowtime < FD) ? VOLUME : 0);
-  analogWrite(SP_BACK, ((BACK_START < nowtime) && (nowtime < TOTAL_END)) ? VOLUME : 0);
-  if (nowtime < TOTAL_END) return;
+  analogWrite(SP_BACK, ((BACK_START < nowtime) && flg) ? VOLUME : 0);
+  digitalWrite(LED_PORT, flg ? HIGH : LOW);
+  
+  if (flg) return;
   running_flg = false;
 }
 
