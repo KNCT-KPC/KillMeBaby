@@ -3,7 +3,7 @@ const int SP_BACK = 11;
 const int SW_PORT = 8;
 const int LED_PORT = 7;
 
-const int VOLUME = 16;
+const int VOLUME = 128;
 const int FD = 200;
 const int BD = FD;
 const int ISI = -50;
@@ -15,7 +15,11 @@ unsigned long start_time;
 
 void setup() {
   running_flg = false;
-  TCCR2B = ((TCCR2B & B11111000) | B00000101);
+  //TCCR2B = ((TCCR2B & B11111000) | B00000101);
+  
+  TCCR2B = TCCR2B & B11111000 | B00000101;
+  //TCCR2B = TCCR2B & B11111000 | B00000110;
+  //TCCR2B = TCCR2B & B11111000 | B00000111;
   
   pinMode(SP_FRONT, OUTPUT);
   pinMode(SP_BACK, OUTPUT);
