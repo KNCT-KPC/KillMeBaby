@@ -9,6 +9,7 @@ const int ISI = -50;
 const int BACK_START = FD + ISI;
 const int TOTAL_END = BACK_START + BD;
 const float SIN_COEF = 0.00157079633; // (2pi) / ((1 / f[Hz])[us])
+const float ZERO_LEVEL = 100;
 
 bool running_flg;
 unsigned long start_time;
@@ -54,7 +55,7 @@ void driveDevice(unsigned long us)
 
   // Front
   if (ms < FD) {
-    int v = (int)(127.5 * (sin(SIN_COEF * us) + 1.0));
+    int v = (int)(ZERO_LEVEL * (sin(SIN_COEF * us) + 1.0));
     analogWrite(SP_FRONT, v);
   } else {
     analogWrite(SP_FRONT, 0);
@@ -62,7 +63,7 @@ void driveDevice(unsigned long us)
 
   // Back
   if ((BACK_START < ms) && flg) {
-    int v = (int)(127.5 * (sin(SIN_COEF * (us - (BACK_START * 1000))) + 1.0));
+    int v = (int)(ZERO_LEVEL * (sin(SIN_COEF * (us - (BACK_START * 1000))) + 1.0));
     analogWrite(SP_BACK, v);
   } else {
     analogWrite(SP_BACK, 0);
