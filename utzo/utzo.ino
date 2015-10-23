@@ -9,7 +9,7 @@ const int ISI = -50;
 const int BACK_START = FD + ISI;
 const int TOTAL_END = BACK_START + BD;
 const float SIN_COEF = 0.00157079633; // (2pi) / ((1 / f[Hz])[us])
-const float ZERO_LEVEL = 100;
+const float ZERO_LEVEL = 127.5;
 const int DELAY_MSEC = 125;
 
 bool running_flg;
