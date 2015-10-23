@@ -10,6 +10,7 @@ const int BACK_START = FD + ISI;
 const int TOTAL_END = BACK_START + BD;
 const float SIN_COEF = 0.00157079633; // (2pi) / ((1 / f[Hz])[us])
 const float ZERO_LEVEL = 100;
+const int DELAY_MSEC = 125;
 
 bool running_flg;
 unsigned long start_time;
@@ -30,6 +31,7 @@ void startDevice()
   if (running_flg) return;
 
   running_flg = true;
+  delay(DELAY_MSEC);
   start_time = micros();
 }
 
